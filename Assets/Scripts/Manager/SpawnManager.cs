@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> currentPlayers = new List<GameObject>();
+    [SerializeField] public List<GameObject> currentPlayers = new List<GameObject>();
     [SerializeField] public int currentPlayerNumber;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform centerPoint;
@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        CurrentPlayers();
+        CurrentPlayers();        
     }
 
     private int CurrentPlayers()
@@ -46,5 +46,5 @@ public class SpawnManager : MonoBehaviour
         spawnPosZ = Random.Range(spawnPosZValue[0], spawnPosZValue[1]);
         spawnPos = new Vector3(spawnPosX, 0, spawnPosZ);
         return spawnPos;
-    }
+    }   
 }
