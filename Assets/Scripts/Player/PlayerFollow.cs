@@ -20,7 +20,7 @@ public class PlayerFollow : MonoBehaviour
 
     private void FollowCenterPoint()
     {
-        transform.position = Vector3.Lerp(transform.position,FollowCenterPointPosition(), 2.0f*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position,FollowCenterPointPosition(), 6.0f*Time.deltaTime);
     }
 
     private Vector3 FollowCenterPointPosition()

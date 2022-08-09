@@ -9,11 +9,16 @@ public class PlayerSwipeControl : MonoBehaviour
     private float moveX;
     private float moveXValue;
     private int moveXValueMax = 1;
+    public bool canUseSwipe=true;
 
     private void Update()
     {
-        InputControl();
-        Swipe();
+        if (canUseSwipe)
+        {
+            InputControl();
+            Swipe();
+        }
+        
     }
 
     private void InputControl()

@@ -14,11 +14,20 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosX;
     private float spawnPosZ;
     private Vector3 spawnPos;
+    private GameManager gameManager;
 
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     private void Update()
     {
-        CurrentPlayers();        
+        CurrentPlayers();
+        if (currentPlayerNumber < 1)
+        {
+            gameManager.GameOver();
+        }
     }
 
     private int CurrentPlayers()

@@ -8,32 +8,34 @@ public class TargetManager : MonoBehaviour
 
     [SerializeField] private Transform enemyTarget1;
     [SerializeField] private Transform enemyTarget2;
+    [SerializeField] private Transform enemyTarget3;
+    [SerializeField] private Transform enemyTarget4;
 
-    private bool isDidCollideTarget1;
-    private bool isDidCollideTarget2;
-    
+    private PlayerSwipeControl playerSwipeControl;
+
+    private void Awake()
+    {
+        playerSwipeControl = FindObjectOfType<PlayerSwipeControl>();
+    }
 
     private void FixedUpdate()
     {
-        EnemyTarget(enemyTarget1,isDidCollideTarget1);
-        EnemyTarget(enemyTarget2, isDidCollideTarget2);
+        EnemyTarget(enemyTarget1);
+        EnemyTarget(enemyTarget2);
+        EnemyTarget(enemyTarget3);
+        EnemyTarget(enemyTarget4);
     }
 
-    private void EnemyTarget(Transform enemyTarget,bool isDidCollideTarget)
+    private void EnemyTarget(Transform enemyTarget)
     {
-        if (!isDidCollideTarget && enemyTarget!=null)
+        if (enemyTarget!=null)
         {
-            if (centerPoint.position.z + 8.0f >= enemyTarget.position.z)
-            {                
-                centerPoint.position = Vector3.MoveTowards(centerPoint.position, enemyTarget.position, 3.0f*Time.deltaTime);
-                enemyTarget.position = Vector3.MoveTowards(enemyTarget.position, centerPoint.position, 2.5f*Time.deltaTime);
-            }
-
-            if (centerPoint.position.z - 3.0f >= enemyTarget.position.z && (centerPoint.position.x -2.5f>= enemyTarget.position.x || centerPoint.position.x + 2.5f <= enemyTarget.position.x))
-            {                
-                isDidCollideTarget1 = true;
-                isDidCollideTarget2 = true;
-            }
+            if (centerPoint.position.z + 7.0f >= enemyTarget.position.z)
+            {
+                playerSwipeControl.canUseSwipe = false;
+                centerPoint.position = Vector3.MoveTowards(centerPoint.position, enemyTarget.position, 2.8f*Time.deltaTime);
+                enemyTarget.position = Vector3.MoveTowards(enemyTarget.position, centerPoint.position, 2.8f*Time.deltaTime);
+            }           
         }        
     }
 }
