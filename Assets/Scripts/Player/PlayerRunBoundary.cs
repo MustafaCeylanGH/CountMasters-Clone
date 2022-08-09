@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerRunBoundary : MonoBehaviour
 {
     private float xBoundary;
-    private float xBoundaryValue = 4.5f;
+    private float xBoundaryValue = 4.0f;
     void Update()
     {
         CheckBoundary();

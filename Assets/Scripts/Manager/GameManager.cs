@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyTarget1Text;
     [SerializeField] private Transform enemyTarget1;    
     [SerializeField] public int enemyTarget1Number;
+
+    [SerializeField] private TextMeshProUGUI enemyTarget2Text;
+    [SerializeField] private Transform enemyTarget2;
+    [SerializeField] public int enemyTarget2Number;
+
     private SpawnManager spawnManager;
 
     private void Awake()
@@ -21,26 +26,30 @@ public class GameManager : MonoBehaviour
     private void LateUpdate()
     {
         CurrentPlayerNumber();
-        EnemyTargetNumber();       
+        EnemyTargetNumber(enemyTarget1, enemyTarget1Number, enemyTarget1Text);
+        EnemyTargetNumber(enemyTarget2, enemyTarget2Number, enemyTarget2Text);
     }
 
     private void CurrentPlayerNumber()
     {
-        currentNumberText.transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y+2.5f, centerPoint.position.z);
+        currentNumberText.transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y+2.5f, centerPoint.position.z-1.0f);
         currentNumberText.text = spawnManager.currentPlayerNumber.ToString();        
     }
 
-    private void EnemyTargetNumber()
+    private void EnemyTargetNumber(Transform enemyTarget,int enemyTargetNumber,TextMeshProUGUI enemyTargetText)
     {
-        if (enemyTarget1 != null)
+        if (enemyTarget != null)
         {
-            enemyTarget1Text.transform.position = new Vector3(enemyTarget1.position.x, enemyTarget1.position.y + 2.5f, enemyTarget1.position.z);
-            enemyTarget1Text.text = enemyTarget1Number.ToString();
+            if (enemyTargetNumber == 0)
+            {
+                Destroy(enemyTargetText);
+                Destroy(enemyTarget.gameObject);
+            }
+
+            enemyTargetText.transform.position = new Vector3(enemyTarget.position.x, enemyTarget.position.y+3.0f, enemyTarget.position.z+1.5f);
+            enemyTargetText.text = enemyTargetNumber.ToString();           
         }       
 
-        if (enemyTarget1Number == 0)
-        {
-            Destroy(enemyTarget1Text);
-        }
+        
     }
 }

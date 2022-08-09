@@ -6,6 +6,8 @@ public class PlayerCollision : MonoBehaviour
 {
     private SpawnManager spawnManager;
     private GameManager gameManager;
+    private bool isDidCollidePlayer1;
+    private bool isDidCollidePlayer2;
 
     private void Awake()
     {
@@ -14,12 +16,30 @@ public class PlayerCollision : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy1"))
         {
-            Destroy(gameObject);
-            Destroy(collision.gameObject);            
-            spawnManager.currentPlayers.Remove(gameObject);
-            gameManager.enemyTarget1Number--;
+            if (!isDidCollidePlayer1)
+            {
+                isDidCollidePlayer1 = true;
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+                spawnManager.currentPlayers.Remove(gameObject);
+                gameManager.enemyTarget1Number--;
+                
+            }         
+        }
+
+        if (collision.gameObject.CompareTag("Enemy2"))
+        {
+            if (!isDidCollidePlayer2)
+            {
+                isDidCollidePlayer2 = true;
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+                spawnManager.currentPlayers.Remove(gameObject);
+                gameManager.enemyTarget2Number--;
+
+            }
         }
     }
 }

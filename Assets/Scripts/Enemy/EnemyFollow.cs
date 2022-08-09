@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    private Transform enemyTarget1;
+    [SerializeField] private Transform enemyTarget1;
+    [SerializeField] private Transform enemyTarget2;
 
+    [SerializeField] private bool isEnemy1;
+    [SerializeField] private bool isEnemy2;
 
-    private void Awake()
-    {
-        enemyTarget1 = GameObject.Find("EnemyTarget1").transform;
-    }
+        
 
     private void FixedUpdate()
     {
-        FollowCenterPoint();
+        FollowCenterPoint(enemyTarget1,isEnemy1);
+        FollowCenterPoint(enemyTarget2, isEnemy2);
     }
 
-    private void FollowCenterPoint()
+    private void FollowCenterPoint(Transform enemyTarget,bool isEnemyTargetNumber)
     {
-        transform.position = Vector3.Lerp(transform.position, enemyTarget1.position, 2.0f*Time.deltaTime);
+        if (isEnemyTargetNumber)
+        {
+            transform.position = Vector3.Lerp(transform.position, enemyTarget.position, 2.0f * Time.deltaTime);
+        }        
     }
 }

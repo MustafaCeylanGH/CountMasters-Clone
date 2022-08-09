@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
 
         spawnPosX = Random.Range(spawnPosXValue[0], spawnPosXValue[1]);
         spawnPosZ = Random.Range(spawnPosZValue[0], spawnPosZValue[1]);
-        spawnPos = new Vector3(spawnPosX, 0, spawnPosZ);
+        spawnPos = new Vector3(spawnPosX, playerPrefab.transform.position.y, spawnPosZ);
         return spawnPos;
     }   
 }
